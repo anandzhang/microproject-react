@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 引入需要的 React 相关库 -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <!-- 案例代码 -->
+    <script type="text/babel">
+      const Fragment = React.Fragment
+      class App extends React.Component {
+        constructor(props) {
+          super(props)
+
+          this.state = {
+            content: ['早起', '打代码', '打代码', '打代码', '睡觉']
+          }
+          this.item = React.createRef()
+        }
+
+        addItem() {
+          let content = this.state.content
+          content.push(this.item.current.value)
+          this.setState({ content })
+          this.item.current.value = null
+        }
+
+        deleteItem(index) {
+          let content = this.state.content
+          content.splice(index, 1)
+          this.setState({ content })
+        }
+
+        render() {
+          return (
+            <Fragment>
+              <h1>To-Do List</h1>
+              <ul>
+                {this.state.content.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      {item}------
+                      <button onClick={this.deleteItem.bind(this, index)}>删除</button>
+                    </li>
+                  )
+                })}
+              </ul>
+              <input type="text" ref={this.item} />
+              <button onClick={this.addItem.bind(this)}>添加</button>
+            </Fragment>
+          )
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById('app'))
+    </script>
+  </body>
+</html>

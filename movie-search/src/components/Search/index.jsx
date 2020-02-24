@@ -5,34 +5,41 @@ export default class Search extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentTag: '热门',
       tags: []
     }
+    this.search = React.createRef()
   }
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     fetch('/api/j/search_tags')
       .then(res => res.json())
       .then(data => this.setState({ tags: data.tags }))
   }
-  
+
+  handleSearch = () => this.props.getSearchTag(this.search.current.value)
+
+  sendSearchTag = e => this.props.getSearchTag(e.target.innerText)
+
+  renderTags = (tags) => {
+    if (tags && tags.length) {
+      return tags.map((item, index) => {
+        return (
+          <li key={index} onClick={this.sendSearchTag}>{item}</li>
+        )
+      })
+    }
+    return <li>Loading</li>
+  }
+
   render() {
     const { tags } = this.state
     return (
       <Fragment>
         <div className='search'>
-          <input type="text" />
-          <button>搜索</button>
+          <input type="text" ref={this.search} />
+          <button onClick={this.handleSearch}>搜索</button>
         </div>
-        <ul className='tags'>
-          {
-            tags.map((item, index) => {
-              return (
-                <li key={index}>{item}</li>
-              )
-            })
-          }
-        </ul>
+        <ul className='tags'>{this.renderTags(tags)}</ul>
       </Fragment>
     )
   }

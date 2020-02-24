@@ -1,0 +1,14 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tags li {
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.tags li:hover {
+  color: #0984e3;
+}

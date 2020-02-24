@@ -1,0 +1,36 @@
+.movie-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.movie-list li {
+  width: 250px;
+  margin: 16px;
+  padding: 10px 8px;
+  align-self: center;
+  text-align: center;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+img.poster {
+  width: 230px;
+  height: 300px;
+}
+
+p.info {
+  margin: 10px 0 4px;
+  font-size: 20px;
+}
+
+p.info a {
+  color: #0984e3;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+p.info .rate {
+  padding-left: 12px;
+  color: #f0932b;
+  font-weight: bold;
+}

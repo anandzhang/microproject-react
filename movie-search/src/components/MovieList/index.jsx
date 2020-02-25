@@ -29,7 +29,7 @@ export default class MovieList extends Component {
       return movies.map((item, index) => {
         return (
           <li key={index}>
-            <img className="poster" src={item.cover} alt={item.title} />
+            <img className="poster" src={item.cover} alt={item.title} referrerPolicy='no-referrer' />
             <p className='info'>
               <a href={item.url}>{item.title}</a>
               <span className='rate'>{item.rate}</span>

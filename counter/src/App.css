@@ -1,0 +1,44 @@
+.container {
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container h2 {
+  margin: 30px;
+  color: #ff7675;
+  font-size: 36px;
+}
+
+.container input[type="number"] {
+  width: 60px;
+  padding: 5px 0px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.btn-groups {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+.btn-groups button {
+  width: 90px;
+  height: 90px;
+  border: none;
+  box-shadow: 1px 2px 3px 3px #00cec9;
+  border-radius: 50%;
+  background-color: #81ecec;
+  color: #2d3436;
+  letter-spacing: 2px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-groups button:hover {
+  box-shadow: 2px 3px 3px 3px #00cec9;
+}

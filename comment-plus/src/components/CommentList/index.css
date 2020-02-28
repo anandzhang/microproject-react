@@ -1,0 +1,47 @@
+.comment-list {
+  list-style-type: none;
+}
+
+.comment-list li {
+  position: relative;
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #defaff;
+}
+
+.comment-list .name {
+  font-weight: bold;
+}
+
+.comment-list .content {
+  padding: 0 20px;
+}
+
+.comment-list .delete {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.comment-list .delete::before, .comment-list .delete::after {
+  content: "";
+  width: 1px;
+  transform: rotate(45deg);
+  background-color: #222;
+}
+
+.comment-list .delete::after {
+  transform: rotate(-45deg);
+}
+
+.comment-list .delete:hover {
+  transform: rotate(180deg);
+}

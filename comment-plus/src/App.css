@@ -1,0 +1,14 @@
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+.container h1 {
+  color: #1B9CFC;
+  text-align: center;
+}
+
+.container h2 {
+  padding-left: 10px;
+  color: #1B9CFC;
+  border-left: 5px solid #1B9CFC;
+}

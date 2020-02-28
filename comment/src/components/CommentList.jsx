@@ -10,13 +10,13 @@ export default class CommentList extends React.Component {
   }
 
   handleAdd = (name, msg) => {
-    const list = this.state.list
+    const { list } = this.state
     list.push(msg)
     this.setState({ list })
   }
 
   deleteComment = index => {
-    const list = this.state.list
+    const { list } = this.state
     list.splice(index, 1)
     this.setState({ list })
   }
@@ -26,14 +26,16 @@ export default class CommentList extends React.Component {
   }
 
   renderList = () => {
-    return this.state.list.map((item, index) => {
-      return (
-        <Fragment key={index}>
-          <dt>{item.name}说：</dt>
-          <dd>{item.content} --- <button onClick={this.deleteComment}>删除评论</button></dd>
-        </Fragment>
-      )
-    })
+    const { list } = this.state
+    return list.map((item, index) => (
+      <Fragment key={index}>
+        <dt>{item.name}说：</dt>
+        <dd>
+          {item.content} ---
+         <button onClick={() => this.deleteComment(index)}>删除评论</button>
+        </dd>
+      </Fragment>
+    ))
   }
 
   render() {

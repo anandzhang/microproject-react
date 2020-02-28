@@ -11,22 +11,22 @@ class CommentList extends React.Component {
   }
 
   renderList = () => {
-    return this.props.comments.map((item, index) => {
-      return (
-        <li key={index}>
-          <p className='name'>{item.name}说：</p>
-          <p className='content'>{item.content}</p>
-          <div className='delete' onClick={() => this.handleDelete(index)}>删除</div>
-        </li>
-      )
-    })
+    const { comments } = this.props
+    return comments.map((item, index) => (
+      <li key={index}>
+        <p className='name'>{item.name}说：</p>
+        <p className='content'>{item.content}</p>
+        <div className='delete' onClick={() => this.handleDelete(index)}>删除</div>
+      </li>
+    ))
   }
 
   render() {
+    const { total } = this.props
     return (
       <Fragment>
-        <h2>评论列表 总:{this.props.total}</h2>
-        {this.props.total ? '' : '当前还没有任何评论，做个沙发吧。'}
+        <h2>评论列表 总:{total}</h2>
+        {total ? '' : '当前还没有任何评论，做个沙发吧。'}
         <ul className='comment-list'>{this.renderList()}</ul>
       </Fragment>
     )
@@ -34,6 +34,6 @@ class CommentList extends React.Component {
 }
 
 export default connect(
-  (state) => ({ comments: state.comments, total: state.total }),
+  (state) => ({ ...state }),
   { init: asyncInitComment, delete: deleteComment }
 )(CommentList)

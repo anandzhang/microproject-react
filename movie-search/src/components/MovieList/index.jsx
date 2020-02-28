@@ -26,17 +26,15 @@ export default class MovieList extends Component {
 
   renderMovies = (movies) => {
     if (movies && movies.length) {
-      return movies.map((item, index) => {
-        return (
-          <li key={index}>
-            <img className="poster" src={item.cover} alt={item.title} referrerPolicy='no-referrer' />
-            <p className='info'>
-              <a href={item.url}>{item.title}</a>
-              <span className='rate'>{item.rate}</span>
-            </p>
-          </li>
-        )
-      })
+      return movies.map((item, index) => (
+        <li key={index}>
+          <img className="poster" src={item.cover} alt={item.title} referrerPolicy='no-referrer' />
+          <p className='info'>
+            <a href={item.url}>{item.title}</a>
+            <span className='rate'>{item.rate}</span>
+          </p>
+        </li>
+      ))
     }
     return <li>Loading</li>
   }

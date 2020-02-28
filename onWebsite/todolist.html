@@ -25,24 +25,25 @@
         }
 
         addItem() {
-          let content = this.state.content
+          let { content } = this.state
           content.push(this.item.current.value)
           this.setState({ content })
           this.item.current.value = null
         }
 
         deleteItem(index) {
-          let content = this.state.content
+          let { content } = this.state
           content.splice(index, 1)
           this.setState({ content })
         }
 
         render() {
+          const { content } = this.state
           return (
             <Fragment>
               <h1>To-Do List</h1>
               <ul>
-                {this.state.content.map((item, index) => {
+                {content.map((item, index) => {
                   return (
                     <li key={index}>
                       {item}------

@@ -6,7 +6,7 @@
 
 ## 效果
 
-![效果](https://raw.githubusercontent.com/anandzhang/microproject-react/master/readme-img/comment-plus.png)
+![效果](https://raw.githubusercontent.com/anandzhang/microproject-react/fix_readme_img/readme-img/comment-plus.png)
 
 ## 运行
 

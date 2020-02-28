@@ -56,7 +56,8 @@
         }
 
         renderList = () => {
-          return this.props.list.map((item, index) => (
+          const { list } = this.props
+          return list.map((item, index) => (
             <li key={index}>
               {item}------
               <button onClick={() => this.deleteItem(index)}>删除</button>

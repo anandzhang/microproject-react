@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controlled Form Use Hook</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 引入需要的 React 相关库 -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <!-- 案例代码 -->
+    <script type="text/babel">
+      /*
+      * 常说函数组件是无状态、有属性的组件，类组件是有状态、有属性的组件
+      * 但是 React 16.8 后新增了Hooks特性，使得不用类组件也能使用状态和其他React特性
+      */
+      const { useState } = React
+      function Form() {
+        // 使用Hooks特性声明状态
+        const [name, setName] = useState('anand')
+        const [password, setPassword] = useState('123456')
+        // 定义onChange事件处理函数
+        const handleNameChange = e => setName(e.target.value)
+        const handlePasswordChange = e => setPassword(e.target.value)
+        // 返回虚拟DOM
+        return (
+          <div>
+            <form>
+              账号：<input type="text" value={name} onChange={handleNameChange} /><br />
+              密码：<input type="password" value={password} onChange={handlePasswordChange} /><br />
+            </form>
+            <hr />
+            <p>账号：{name}</p>
+            <p>密码：{password}</p>
+          </div>
+        )
+      }
+      ReactDOM.render(<Form />, document.getElementById('app'))
+    </script>
+  </body>
+</html>

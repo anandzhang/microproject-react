@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher-order Component</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 引入需要的 React 相关库 -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <!-- 案例代码 -->
+    <script type="text/babel">
+      /*
+      * 高阶函数：
+      *    1. 当一个函数接受的参数同样也是一个函数时，这个函数是高阶函数
+      *         比如：数据的 map、some 方法
+      *    2. 当一个函数的返回值也是一个函数时，这个函数也是高阶函数
+      *         比如：进行this绑定的 bind 方法，它就是返回了一个新的函数，新函数的this指向为第一个参数。
+      * 高阶组件：
+      *    接受组件作为参数，同时返回值为一个新组件的函数
+      */
+      const { Component } = React
+      // 定义一个类组件 Form
+      class Form extends Component {
+        render() {
+          return <input type='text' {...this.props} />
+        }
+      }
+      // 定义一个高阶组件
+      const higherOrderComponent = BaseComponent => {
+        return class extends Component {
+          constructor(props) {
+            super(props)
+            this.state = {
+              value: ''
+            }
+          }
+          handleChange = e => this.setState({
+            value: e.target.value
+          })
+          render() {
+            const { value } = this.state
+            /* 高阶组件属性代理：
+            *     高阶组件返回的新组件中定义了传入组件所需要的属性，并且传给了传入组件
+            */
+            const newProps = {
+              value,
+              onChange: this.handleChange
+            }
+            // <EnhancedComponent name='demo' /> 想要把 name 传给 Form 组件
+            // 所以 newProps = Object.assign({}, this.props, newProps)
+            return <BaseComponent {...newProps} />
+          }
+        }
+      }
+      // 得到通过高阶组件产生的受控表单
+      const EnhancedComponent = higherOrderComponent(Form)
+      ReactDOM.render(<EnhancedComponent />, document.getElementById('app'))
+    </script>
+  </body>
+</html>

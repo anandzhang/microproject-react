@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Hook</title>
+    <style>
+      #app {
+        display: flex;
+        justify-content: center;
+      }
+
+      #app div {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px 0 0 10px;
+        text-align: center;
+      }
+
+      #app div:nth-child(2) {
+        border-radius: 0 10px 10px 0;
+      }
+
+      #app div button {
+        margin-top: 40%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 引入需要的 React 相关库 -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <!-- 案例代码 -->
+    <script type="text/babel">
+      const { Fragment, useState } = React
+      // 定义一个自定义的Hook函数 一般命名以use开头
+      // 抽离出多个函数组件的相似状态和逻辑
+      // 类组件中相同的状态和逻辑，怎么做到复用，我现在能想到的就是提取到父组件进行props传递、HOC。
+      const useRandomColor = initColor => {
+        const [color, setColor] = useState(initColor)
+        const changeColor = () => {
+          const randomColor = '#' + Math.random().toString(16).slice(2, 8)
+          setColor(randomColor)
+        }
+        return [color, changeColor]
+      }
+      // 函数组件 Rect1
+      function Rect1() {
+        const [color, changeColor] = useRandomColor('BurlyWood')
+        return (
+          <div style={{ backgroundColor: color }}>
+            <button onClick={changeColor}>点击改变颜色</button>
+          </div>
+        )
+      }
+      // 函数组件 React2
+      function Rect2() {
+        const [color, changeColor] = useRandomColor('CadetBlue')
+        const autoChangeColor = e => {
+          e.target.disabled = true
+          setInterval(() => changeColor(), 1000)
+        }
+        return (
+          <div style={{ backgroundColor: color }}>
+            <button id="de" onClick={autoChangeColor}>开始改变颜色</button>
+          </div>
+        )
+      }
+      // 根组件 App
+      function App() {
+        return (
+          <Fragment>
+            <Rect1 />
+            <Rect2 />
+          </Fragment>
+        )
+      }
+      ReactDOM.render(<App />, document.getElementById('app'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>useReducer</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 引入需要的 React 相关库 -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+    <!-- 案例代码 -->
+    <script type="text/babel">
+      const { useReducer } = React
+      // 类似 redux
+      const reducer = (state, action) => {
+        const { type, data } = action
+        switch (type) {
+          case 'add':
+            return state + data
+          case 'minus':
+            return state - data
+          default:
+            return state
+        }
+      }
+      function Counter() {
+        const [count, dispatch] = useReducer(reducer, 0)
+        return (
+          <div>
+            <p>{count}</p>
+            <button onClick={() => dispatch({ type: 'add', data: 1 })}>+</button>
+            <button onClick={() => dispatch({ type: 'minus', data: 1 })}>-</button>
+          </div>
+        )
+      }
+      ReactDOM.render(<Counter />, document.getElementById('app'))
+    </script>
+  </body>
+</html>

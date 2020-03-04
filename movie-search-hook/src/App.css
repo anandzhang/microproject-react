@@ -1,0 +1,73 @@
+#root {
+  width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#root h1 {
+  margin: 20px;
+  font-size: 30px;
+}
+
+.movies-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.movies-list li {
+  margin: 0 10px;
+}
+
+.movies-list li img {
+  width: 184px;
+  height: 258px;
+}
+
+.search {
+  position: relative;
+}
+
+.search input {
+  width: 260px;
+  height: 23px;
+  padding: 1px 10px;
+  border: 1px solid #000;
+  outline: none;
+}
+
+.search button {
+  padding: 3px 14px;
+  border: 1px solid #000;
+  background-color: #fff;
+  outline: none;
+}
+
+.search .tags-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 420px;
+  margin: 10px auto;
+  height: 30px;
+  overflow: hidden;
+}
+
+.search .tags-list.visible {
+  height: auto;
+  overflow: visible;
+}
+
+.search .tags-list li {
+  margin: 0 5px;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.search .tags-list li.more {
+  position: absolute;
+  top: 37px;
+  right: 29%;
+  color: blue;
+  user-select: none;
+}

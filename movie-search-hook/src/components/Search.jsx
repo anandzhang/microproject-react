@@ -1,23 +1,41 @@
 import React, { useEffect, useRef } from 'react'
 import { loadingMoviesAction, saveMoviesAction } from '../store/actions'
-import { requestMovies } from '../api/Douban'
+import { requestMovies, requestTags } from '../api/Douban'
 
 export default function Search(props) {
   const tag = useRef()
-  const { dispatch } = props
+  const { dispatch, tags } = props
 
   // 第二个参数使用[]，欺骗React来模拟类组件的componentDidMount
   useEffect(() => {
     requestMovies(dispatch, tag.current.value)
+    requestTags(dispatch)
   }, [])
 
   const searchMovies = () => requestMovies(dispatch, tag.current.value)
 
+  const showMoreTags = e => {
+    const tagsDOM = e.target.parentElement
+    const toggleResult = tagsDOM.classList.toggle('visible')
+    if (toggleResult) {
+      e.target.innerText = '收起'
+    } else {
+      e.target.innerText = '更多'
+    }
+  }
+
   return (
-    <div>
+    <div className='search'>
       <input type='text' defaultValue='热门' ref={tag} />
       <button onClick={searchMovies}>搜索</button>
-
+      <ul className='tags-list'>
+        {
+          tags.map((item, index) => {
+            return <li key={index}>{item}</li>
+          })
+        }
+        <li className='more' onClick={showMoreTags}>更多</li>
+      </ul>
     </div>
   )
 }

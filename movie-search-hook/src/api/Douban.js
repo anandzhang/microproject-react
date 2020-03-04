@@ -2,8 +2,8 @@ import BaseApi from './BaseApi'
 import { saveTagsAction, saveMoviesAction } from '../store/actions'
 
 export const requestTags = async (dispatch) => {
-  const tags = fetch(BaseApi.searchTags).then(res => res.json())
-  dispatch(saveTagsAction(tags))
+  const res = await fetch(BaseApi.searchTags).then(res => res.json())
+  dispatch(saveTagsAction(res.tags))
 }
 
 export const requestMovies = async (dispatch, tag) => {

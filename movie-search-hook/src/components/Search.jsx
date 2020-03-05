@@ -1,20 +1,19 @@
 import React, { useEffect, useRef, Fragment } from 'react'
-import { loadingMoviesAction } from '../store/actions'
-import { requestMovies, requestTags } from '../api/Douban'
+import { saveCurrentTagAction } from '../store/actions'
+import { requestTags } from '../api/Douban'
 
 export default function Search(props) {
   const tag = useRef()
-  const { dispatch, tags, loading } = props
+  const { dispatch, tags, loading, currentTag } = props
 
-  // 第二个参数使用[]，欺骗React来模拟类组件的componentDidMount
   useEffect(() => {
-    requestMovies(dispatch, tag.current.value)
     requestTags(dispatch)
-  }, [])
+    tag.current.value = currentTag
+  }, [dispatch])
 
   const searchMovies = () => {
-    dispatch(loadingMoviesAction())
-    requestMovies(dispatch, tag.current.value)
+    const currentTag = tag.current.value
+    dispatch(saveCurrentTagAction(currentTag))
   }
 
   const showMoreTags = e => {
@@ -59,7 +58,7 @@ export default function Search(props) {
   return (
     <div className='search'>
       <div className='search-bar'>
-        <input type='text' defaultValue='热门' ref={tag} />
+        <input type='text' ref={tag} />
         <div className='btn' onClick={searchMovies}>搜索</div>
       </div>
       <div className='search-tags'>{renderTags()}</div>

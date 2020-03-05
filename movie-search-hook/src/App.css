@@ -16,12 +16,22 @@
 }
 
 .movies-list li {
-  margin: 0 10px;
+  margin: 10px;
 }
 
 .movies-list li img {
   width: 184px;
   height: 258px;
+}
+
+.movies-list li a {
+  color: blue;
+}
+
+.movies-list li .rate {
+  margin-left: 10px;
+  color: #f0932b;
+  font-weight: bold;
 }
 
 .search {
@@ -62,6 +72,10 @@
   margin: 0 5px;
   line-height: 30px;
   cursor: pointer;
+}
+
+.search .tags-list li:hover {
+  color: blue;
 }
 
 .search .tags-list li.more {

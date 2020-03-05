@@ -1,12 +1,14 @@
 import React from 'react'
 
 export default function MovieItem(props) {
-  const { title, cover, rate } = props.item
+  const { title, cover, rate, url } = props.item
   return (
     <li>
-      <p>{title}</p>
       <img src={cover} alt={title} referrerPolicy='no-referrer' />
-      <p>{rate}</p>
+      <p>
+        <a href={url}>{title}</a>
+        <span className='rate'>{rate}</span>
+      </p>
     </li>
   )
 }

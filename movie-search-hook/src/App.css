@@ -103,6 +103,10 @@
   margin-top: 100px;
 }
 
+.pagination button {
+  margin: 0 10px;
+}
+
 @media screen and (max-width:500px) {
   #root {
     width: auto;

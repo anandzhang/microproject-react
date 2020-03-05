@@ -6,12 +6,12 @@ import './App.css'
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initState)
-  const { tags, movies, loading } = state
+  const { tags, movies, loading, currentTag } = state
   return (
     <Fragment>
       <h1>电影搜索</h1>
-      <Search dispatch={dispatch} tags={tags} loading={loading} />
-      <MovieList movies={movies} loading={loading} />
+      <Search {...{ dispatch, tags, currentTag, loading }} />
+      <MovieList {...{ dispatch, movies, currentTag, loading }} />
     </Fragment>
   )
 }

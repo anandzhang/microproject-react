@@ -16,11 +16,12 @@
 }
 
 .movies-list li {
+  width: 184px;
   margin: 10px;
 }
 
 .movies-list li img {
-  width: 184px;
+  width: inherit;
   height: 258px;
 }
 
@@ -78,10 +79,11 @@
   color: blue;
 }
 
-.search .tags-list li.more {
+.search .more {
   position: absolute;
-  top: 37px;
-  right: 29%;
+  top: 38px;
+  right: 30%;
   color: blue;
+  cursor: pointer;
   user-select: none;
 }

@@ -15,7 +15,7 @@ export default function Search(props) {
   const searchMovies = () => requestMovies(dispatch, tag.current.value)
 
   const showMoreTags = e => {
-    const tagsDOM = e.target.parentElement
+    const tagsDOM = e.target.previousElementSibling
     const toggleResult = tagsDOM.classList.toggle('visible')
     if (toggleResult) {
       e.target.innerText = '收起'
@@ -24,18 +24,26 @@ export default function Search(props) {
     }
   }
 
+  const selectTag = e => {
+    const { tagName, innerText } = e.target
+    if (tagName.toLowerCase() === 'li') {
+      tag.current.value = innerText
+      searchMovies()
+    }
+  }
+
   return (
     <div className='search'>
       <input type='text' defaultValue='热门' ref={tag} />
       <button onClick={searchMovies}>搜索</button>
-      <ul className='tags-list'>
+      <ul className='tags-list' onClick={selectTag}>
         {
           tags.map((item, index) => {
             return <li key={index}>{item}</li>
           })
         }
-        <li className='more' onClick={showMoreTags}>更多</li>
       </ul>
+      <div className='more' onClick={showMoreTags}>更多</div>
     </div>
   )
 }

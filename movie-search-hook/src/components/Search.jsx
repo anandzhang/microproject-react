@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react'
-import { loadingMoviesAction, saveMoviesAction } from '../store/actions'
+import React, { useEffect, useRef, Fragment } from 'react'
+import { loadingMoviesAction } from '../store/actions'
 import { requestMovies, requestTags } from '../api/Douban'
 
 export default function Search(props) {
   const tag = useRef()
-  const { dispatch, tags } = props
+  const { dispatch, tags, loading } = props
 
   // 第二个参数使用[]，欺骗React来模拟类组件的componentDidMount
   useEffect(() => {
@@ -12,7 +12,10 @@ export default function Search(props) {
     requestTags(dispatch)
   }, [])
 
-  const searchMovies = () => requestMovies(dispatch, tag.current.value)
+  const searchMovies = () => {
+    dispatch(loadingMoviesAction())
+    requestMovies(dispatch, tag.current.value)
+  }
 
   const showMoreTags = e => {
     const tagsDOM = e.target.previousElementSibling
@@ -24,7 +27,7 @@ export default function Search(props) {
     }
   }
 
-  const selectTag = e => {
+  const useProvidedTag = e => {
     const { tagName, innerText } = e.target
     if (tagName.toLowerCase() === 'li') {
       tag.current.value = innerText
@@ -32,11 +35,17 @@ export default function Search(props) {
     }
   }
 
-  return (
-    <div className='search'>
-      <input type='text' defaultValue='热门' ref={tag} />
-      <button onClick={searchMovies}>搜索</button>
-      <ul className='tags-list' onClick={selectTag}>
+  const renderTags = () => {
+    if (loading.tags) {
+      return <p>正在加载标签....</p>
+    } else {
+      return renderList()
+    }
+  }
+
+  const renderList = () => (
+    <Fragment>
+      <ul className='tags-list' onClick={useProvidedTag}>
         {
           tags.map((item, index) => {
             return <li key={index}>{item}</li>
@@ -44,6 +53,16 @@ export default function Search(props) {
         }
       </ul>
       <div className='more' onClick={showMoreTags}>更多</div>
+    </Fragment>
+  )
+
+  return (
+    <div className='search'>
+      <div className='search-bar'>
+        <input type='text' defaultValue='热门' ref={tag} />
+        <div className='btn' onClick={searchMovies}>搜索</div>
+      </div>
+      <div className='search-tags'>{renderTags()}</div>
     </div>
   )
 }

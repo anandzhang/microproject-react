@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer, useEffect, useState } from 'react'
+import React, { Fragment, useReducer } from 'react'
 import { initState, reducer } from './store/reducer'
 import Search from './components/Search'
 import MovieList from './components/MovieList'
@@ -10,7 +10,7 @@ export default function App() {
   return (
     <Fragment>
       <h1>电影搜索</h1>
-      <Search dispatch={dispatch} tags={tags} />
+      <Search dispatch={dispatch} tags={tags} loading={loading} />
       <MovieList movies={movies} loading={loading} />
     </Fragment>
   )
